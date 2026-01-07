@@ -1,0 +1,68 @@
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS movie_db 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_general_ci;
+USE movie_db;
+
+
+-- 电影表（基础表）
+CREATE TABLE movie (
+    movie_id INT PRIMARY KEY AUTO_INCREMENT,
+    movie_name VARCHAR(50) NOT NULL COMMENT '电影名称'
+);
+
+-- 一级评论表
+CREATE TABLE COMMENT (
+    comment_id INT PRIMARY KEY AUTO_INCREMENT,
+    movie_id INT NOT NULL,
+    user_name VARCHAR(30) NOT NULL COMMENT '评论用户',
+    comment_content VARCHAR(500) NOT NULL COMMENT '评论内容',
+    comment_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (movie_id) REFERENCES movie(movie_id)
+);
+
+-- 二级评论表（用户对主评论的回复）movie_db
+CREATE TABLE reply (
+    reply_id INT PRIMARY KEY AUTO_INCREMENT,
+    comment_id INT NOT NULL, -- 关联的一级评论ID
+    user_name VARCHAR(30) NOT NULL COMMENT '回复用户', -- 回复用户
+    reply_content VARCHAR(500) NOT NULL COMMENT '回复内容', -- 回复内容
+    reply_time DATETIME DEFAULT CURRENT_TIMESTAMP, -- 回复时间
+    FOREIGN KEY (comment_id) REFERENCES COMMENT(comment_id)
+);
+
+-- 批量插入电影数据
+INSERT INTO movie (movie_name) VALUES
+('热辣滚烫'),
+('流浪地球3'),
+('熊出没·重启未来'),
+('飞驰人生3'),
+('射雕英雄传'),
+('哪吒之魔童闹海'),
+('年会不能停'),
+('唐探1900');
+
+-- 批量插入评论数据
+INSERT INTO COMMENT (movie_id, user_name, comment_content) VALUES
+(1, '张三', '贾玲的演技太有感染力了，笑中带泪！'),
+(1, '李小红', '剧情很真实，看完想健身了哈哈哈'),
+(2, '李四', '特效绝了，国产科幻的天花板！'),
+(2, '赵小雷', '剧情有点烧脑，二刷才能看懂细节'),
+(3, '王五', '带孩子看的，全程笑个不停，熊二太可爱了'),
+(4, '赵六', '沈腾的台词还是那么搞笑，赛车场面超燃'),
+(5, '孙七', '武侠味很浓，还原了金庸原著的感觉'),
+(6, '周八', '画面制作太精美了，哪吒的形象更立体了'),
+(7, '吴九', '打工人狠狠共鸣了，年会梗太真实'),
+(8, '郑十', '悬疑部分很精彩，反转出乎意料');
+
+-- 批量插入二级评论（关联已有的一级评论ID 1-8）
+INSERT INTO reply (comment_id, user_name, reply_content) VALUES
+(1, '李风', '完全同意！贾玲这次的转型太成功了'),
+(1, '王小美', '哈哈哈健身+逆袭，简直是我的目标'),
+(2, '刘浩然', '特效团队值得加鸡腿，细节拉满'),
+(3, '张天天', '熊二的台词承包了所有笑点，孩子反复看'),
+(4, '陈阳', '沈腾和赛车的适配度100%，热血又搞笑'),
+(5, '黄蓉', '作为金庸迷，觉得还原度超预期！'),
+(6, '李靖', '哪吒的成长线很戳人，画面质感绝了'),
+(8, '秦风', '唐探系列的反转永远猜不到，太会了');
+
