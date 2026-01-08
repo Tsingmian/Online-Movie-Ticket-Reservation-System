@@ -17,14 +17,14 @@ This online movie ticket booking system offers role-based access: end users can 
 - Java 17
 - Spring Boot 3.x
 - MyBatis（主要数据访问）
-- JDBC （少部分）
-- MySQL 8.x
+- JDBC （少部分或者无）
+- MySQL (SQLyog/Laragon/DataGrip)
 - Maven
 
 ### 前端
 
 - Vue 3
-- Axios
+- Axios (待定)
 - Element Plus
 
 ---
