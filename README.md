@@ -81,7 +81,7 @@ MySQL
 
 ```text
 movie-ticket-reservation/
-├─ backend/                         ← Spring Boot 后端（你现在写的）
+├─ backend/                         ← Spring Boot 后端
 │  ├─ src/
 │  │  ├─ main/
 │  │  │  ├─ java/
@@ -109,7 +109,7 @@ movie-ticket-reservation/
 │  │  │     │  └─ ScreeningMapper.xml
 │  │  │     ├─ application.yml      ← 配置文件（你已 OK）
 │  │  │     └─ application-dev.yml
-│  │  └─ test/                      ← 后端测试（现在可不写）
+│  │  └─ test/                      ← 后端测试
 │  └─ pom.xml
 │
 └─ frontend/                        ← Vue3 + Vite 前端
