@@ -73,3 +73,52 @@ DAO 层
  └─ JDBC DAO（并发控制、锁座）
    ↓
 MySQL
+
+---
+
+## 五、项目结构
+
+movie-ticket-reservation/
+├─ backend/                         ← Spring Boot 后端（你现在写的）
+│  ├─ src/
+│  │  ├─ main/
+│  │  │  ├─ java/
+│  │  │  │  └─ com/example/movie_ticket_reservation/
+│  │  │  │     ├─ controller/       ← Controller（对外接口）
+│  │  │  │     │  └─ OrderController.java
+│  │  │  │     ├─ service/          ← 业务层（事务 / 锁座 / 下单）
+│  │  │  │     │  ├─ OrderService.java
+│  │  │  │     │  └─ SeatService.java
+│  │  │  │     ├─ mapper/           ← MyBatis 接口
+│  │  │  │     │  ├─ OrderMapper.java
+│  │  │  │     │  ├─ SeatMapper.java
+│  │  │  │     │  └─ ScreeningMapper.java
+│  │  │  │     ├─ entity/           ← 实体类
+│  │  │  │     │  ├─ Order.java
+│  │  │  │     │  ├─ Seat.java
+│  │  │  │     │  └─ Screening.java
+│  │  │  │     ├─ config/           ← 跨域 / MyBatis / Web 配置
+│  │  │  │     │  └─ CorsConfig.java
+│  │  │  │     └─ MovieTicketReservationApplication.java
+│  │  │  └─ resources/
+│  │  │     ├─ mapper/              ← MyBatis XML
+│  │  │     │  ├─ OrderMapper.xml
+│  │  │     │  ├─ SeatMapper.xml
+│  │  │     │  └─ ScreeningMapper.xml
+│  │  │     ├─ application.yml      ← 配置文件（你已 OK）
+│  │  │     └─ application-dev.yml
+│  │  └─ test/                      ← 后端测试（现在可不写）
+│  └─ pom.xml
+│
+└─ frontend/                        ← Vue3 + Vite 前端
+   ├─ src/
+   │  ├─ views/                     ← 页面级组件
+   │  │  └─ OrderTest.vue
+   │  ├─ router/
+   │  │  └─ index.js
+   │  ├─ App.vue
+   │  └─ main.js
+   ├─ index.html
+   ├─ package.json
+   └─ vite.config.js
+
