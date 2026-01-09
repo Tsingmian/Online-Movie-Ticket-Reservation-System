@@ -79,6 +79,7 @@ MySQL
 
 ## 五、项目结构
 
+```text
 movie-ticket-reservation/
 ├─ backend/                         ← Spring Boot 后端（你现在写的）
 │  ├─ src/
