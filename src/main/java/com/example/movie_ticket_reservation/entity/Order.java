@@ -1,22 +1,44 @@
 package com.example.movie_ticket_reservation.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Order {
 
+    @Setter
+    @Getter
     private Long id;
 
     // 下单用户
+    @Setter
+    @Getter
     private Long userId;
 
     // 场次
+    @Setter
+    @Getter
     private Long screeningId;
 
     // 座位ID（第一阶段：单座）
-    private Long seatId;
+    @Setter
+    @Getter
+    private List<Long> seatId;
+
+//    private Integer status;
 
     // 订单价格（元）
-    private Integer price;
+    @Setter
+    @Getter
+    private BigDecimal price;
+
+//    private LocalDateTime createTime;
+    @Setter
+    @Getter
+    private LocalDateTime payTime;
 
     /**
      * 订单状态
@@ -24,66 +46,15 @@ public class Order {
      * 1 = 已支付
      * 2 = 已取消
      */
+    @Setter
+    @Getter
     private Integer status;
 
     // 下单时间
+    @Setter
+    @Getter
     private LocalDateTime createTime;
 
     // ===== getter / setter =====
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getScreeningId() {
-        return screeningId;
-    }
-
-    public void setScreeningId(Long screeningId) {
-        this.screeningId = screeningId;
-    }
-
-    public Long getSeatId() {
-        return seatId;
-    }
-
-    public void setSeatId(Long seatId) {
-        this.seatId = seatId;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
 }

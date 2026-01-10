@@ -17,5 +17,18 @@
         WHERE id = #{id}
     </select>
 
+    <select id="selectByScreeningId"
+            resultType="com.example.movie_ticket_reservation.entity.Seat">
+        SELECT
+        id,
+        screening_id AS screeningId,
+        row_num      AS rowNum,
+        col_num      AS colNum,
+        status
+        FROM seats
+        WHERE screening_id = #{screeningId}
+        ORDER BY row_num, col_num
+    </select>
+
 
 </mapper>

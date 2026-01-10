@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.movie_ticket_reservation.mapper.MovieMapper">
+
+    <!-- 查询所有上映中电影 -->
+    <select id="getAllMovies" resultType="com.example.movie_ticket_reservation.entity.Movie">
+        SELECT id, title, duration, director, actors, description, release_date AS releaseDate, status
+        FROM movie
+        WHERE status = 1
+        ORDER BY release_date DESC
+    </select>
+
+    <!-- 查询id上映中电影 -->
+    <select id="getMovieById" resultType="com.example.movie_ticket_reservation.entity.Movie">
+        SELECT id, title, duration, director, actors, description, release_date AS releaseDate, status
+        FROM movie
+        WHERE id = #{id}
+    </select>
+
+
+    <!-- 模糊查询上映中电影 -->
+    <select id="searchMovies" resultType="com.example.movie_ticket_reservation.entity.Movie">
+        SELECT id, title, duration, director, actors, description, release_date AS releaseDate, status
+        FROM movie
+        WHERE status = 1
+        AND title LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY release_date DESC
+    </select>
+
+</mapper>

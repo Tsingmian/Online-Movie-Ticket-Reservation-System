@@ -5,11 +5,36 @@
 
 <mapper namespace="com.example.movie_ticket_reservation.mapper.OrderMapper">
 
-    <insert id="insertOrder" parameterType="Order">
+    <!-- 插入订单，返回自增主键 -->
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders
-        (user_id, screening_id, seat_id, price, create_time, status)
+        (user_id, screening_id, total_price, status, create_time)
         VALUES
-        (#{userId}, #{screeningId}, #{seatId}, #{price}, #{createTime}, #{status})
+        (#{userId}, #{screeningId}, #{price}, #{status}, #{createTime})
     </insert>
+
+    <!-- 批量插入 order_seat -->
+    <insert id="insertOrderSeats">
+        INSERT INTO order_seat(order_id, seat_id)
+        VALUES
+        <foreach collection="seatIds" item="id" separator=",">
+            (#{orderId}, #{id})
+        </foreach>
+    </insert>
+
+    <!-- 查询订单 -->
+    <select id="selectById" parameterType="long" resultType="Order">
+        SELECT * FROM orders WHERE id = #{id}
+    </select>
+
+    <!-- 查询订单座位 -->
+    <select id="selectSeatIdsByOrderId" parameterType="long" resultType="long">
+        SELECT seat_id FROM order_seat WHERE order_id = #{orderId}
+    </select>
+
+    <!-- 更新订单状态 -->
+    <update id="updateStatus">
+        UPDATE orders SET status = #{status}, pay_time = #{payTime} WHERE id = #{id}
+    </update>
 
 </mapper>
