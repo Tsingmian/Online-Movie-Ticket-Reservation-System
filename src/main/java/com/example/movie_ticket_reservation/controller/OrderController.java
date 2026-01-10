@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
+
+@CrossOrigin(origins = "http://localhost:5173")
+
 public class OrderController {
 
     private final OrderService orderService;
@@ -14,7 +17,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/place")
+    @PostMapping("/place")
     public String placeOrder(@RequestParam Long userId,
                              @RequestParam Long screeningId,
                              @RequestParam Long seatId) {
