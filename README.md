@@ -107,7 +107,7 @@ movie-ticket-reservation/
 │  │  │     │  ├─ OrderMapper.xml
 │  │  │     │  ├─ SeatMapper.xml
 │  │  │     │  └─ ScreeningMapper.xml
-│  │  │     ├─ application.yml      ← 配置文件（你已 OK）
+│  │  │     ├─ application.yml      ← 配置文件
 │  │  │     └─ application-dev.yml
 │  │  └─ test/                      ← 后端测试
 │  └─ pom.xml
@@ -123,4 +123,5 @@ movie-ticket-reservation/
    ├─ index.html
    ├─ package.json
    └─ vite.config.js
-
+```
+- frontend: online-movie-ticket-reservation-system-frontend
