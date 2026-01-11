@@ -18,11 +18,11 @@ public class ScreeningController {
         this.screeningService = screeningService;
     }
 
-    // ① 根据电影 ID 获取场次列表（你现在缺的）
-//    @GetMapping
-//    public List<Screening> getScreeningsByMovieId(@RequestParam Long movieId) {
-//        return screeningService.getByMovieId(movieId);
-//    }
+    // 根据电影 ID 获取场次列表
+    //    @GetMapping
+    //    public List<Screening> getScreeningsByMovieId(@RequestParam Long movieId) {
+    //        return screeningService.getByMovieId(movieId);
+    //    }
     @GetMapping
     public List<Screening> getByMovieId(@RequestParam Long movieId) {
         return screeningService.getByMovieId(movieId);

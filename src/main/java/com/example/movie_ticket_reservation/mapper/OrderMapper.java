@@ -37,4 +37,18 @@ public interface OrderMapper {
     // 查询用户订单总数
     int countOrdersByUser(@Param("userId") Long userId,
                           @Param("status") Integer status);
+
+    List<Order> selectOrders(@Param("status") Integer status,
+                             @Param("offset") int offset,
+                             @Param("size") int size);
+
+    int countOrders(@Param("status") Integer status);
+
+    void deleteOrderSeats(@Param("orderId") Long orderId);
+
+    void deleteOrder(@Param("orderId") Long orderId);
+
+    void updateOrder(Order order);
+
+
 }

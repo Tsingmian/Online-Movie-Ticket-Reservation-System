@@ -51,4 +51,14 @@ public interface SeatMapper {
      */
     int releaseSeats(@Param("seatIds") List<Long> seatIds);
 
+    void insert(Seat seat);
+
+    List<Seat> selectAll();
+
+    void update(Seat seat);
+
+    void delete(Long id);
+    // SeatMapper.java
+    void deleteByScreeningId(@Param("screeningId") Long screeningId);
+
 }

@@ -27,6 +27,8 @@ public class Screening {
     @Getter
     private LocalDateTime startTime;
 
+    @Setter
+    @Getter
     private LocalDateTime endTime;
 
     // 单张票价（单位：元）
@@ -34,9 +36,15 @@ public class Screening {
     @Getter
     private BigDecimal price;
 
+    @Setter
+    @Getter
     private Integer status; // 1=可售 0=停售
+
+    @Setter
+    @Getter
     private LocalDateTime createTime;
 
     // ===== getter / setter =====
+
 
 }

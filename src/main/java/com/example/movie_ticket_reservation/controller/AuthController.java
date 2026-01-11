@@ -22,7 +22,7 @@ public class AuthController {
 //    public Map<String, Object> login(@RequestBody Map<String, String> req) {
 //
 // //        System.out.println("收到登录请求: " + req);
-// //        // 临时返回一个假用户，方便测试
+// //        // 临时返回一个假用户测试
 // //        return Map.of("id", 1, "username", req.get("username"), "role", "user");
 //
 //        User user = authService.login(
@@ -61,7 +61,16 @@ public class AuthController {
 
 
     @GetMapping("/me")
-    public Object me(@RequestParam Long userId) {
-        return userId;
+    public ResponseEntity<?> me(@RequestParam Long userId) {
+        User user = authService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.status(404).body("用户不存在");
+        }
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "username", user.getUsername(),
+                "role", user.getRole()
+        ));
     }
+
 }

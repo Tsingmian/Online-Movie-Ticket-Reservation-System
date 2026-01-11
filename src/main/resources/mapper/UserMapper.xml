@@ -5,15 +5,26 @@
 
 <mapper namespace="com.example.movie_ticket_reservation.mapper.UserMapper">
 
+    <!-- 根据用户名查询用户 -->
     <select id="selectByUsername" resultType="com.example.movie_ticket_reservation.entity.User">
         SELECT id, username, password, role, status, create_time
         FROM user
         WHERE username = #{username}
+        LIMIT 1
     </select>
 
-    <insert id="insertUser" parameterType="com.example.movie_ticket_reservation.entity.User">
-        INSERT INTO user(username, password, role, status)
-        VALUES (#{username}, #{password}, #{role}, #{status})
+    <!-- 根据用户ID查询用户 -->
+    <select id="selectById" resultType="com.example.movie_ticket_reservation.entity.User" parameterType="long">
+        SELECT id, username, password, role, status, create_time
+        FROM user
+        WHERE id = #{userId}
+        LIMIT 1
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insertUser" parameterType="com.example.movie_ticket_reservation.entity.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(username, password, role, status, create_time)
+        VALUES (#{username}, #{password}, #{role}, #{status}, NOW())
     </insert>
 
 </mapper>

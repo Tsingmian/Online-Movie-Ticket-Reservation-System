@@ -100,12 +100,12 @@ import java.util.Map;
 //    }
 //}
 //
-//// 请求 DTO
+// // 请求 DTO
 //class PlaceOrderRequest {
 //    private Long userId;
 //    private Long screeningId;
 //    private List<Long> seatIds;
-//    // getter & setter
+//
 //    public Long getUserId() { return userId; }
 //    public void setUserId(Long userId) { this.userId = userId; }
 //    public Long getScreeningId() { return screeningId; }
@@ -254,6 +254,39 @@ public class OrderController {
         return orderService.getOrderSeats(orderId);
     }
 
+    // 管理员：查询所有订单（分页）
+    @GetMapping("/admin")
+    public Map<String, Object> getAllOrders(
+            @RequestParam(required = false) Integer status,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return orderService.getAllOrders(status, page, size);
+    }
+
+    // 管理员：删除订单
+    @DeleteMapping("/admin/{orderId}")
+    public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
+        try {
+            orderService.deleteOrder(orderId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    // 管理员：支付订单（模拟）
+    @PostMapping("/admin/{orderId}/pay")
+    public ResponseEntity<?> payOrder(@PathVariable Long orderId) {
+        try {
+            // 注意：你的 OrderService 目前没有 payOrder 方法！
+            // 需要补充
+            Order order = orderService.payOrder(orderId); // 👈 需要实现
+            return ResponseEntity.ok(Map.of("order", order));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
+    }
+
 }
 
 
@@ -288,6 +321,8 @@ public class OrderController {
 //        return ResponseEntity.status(500).body(error);
 //    }
 //}
+
+
 
 
 

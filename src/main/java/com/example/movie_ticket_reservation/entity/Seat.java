@@ -22,6 +22,8 @@ public class Seat {
     @Setter
     @Getter
     private Integer status; // 0=可售 1=锁定 2=已售
+    @Setter
+    @Getter
     private LocalDateTime lockTime;
 
 }

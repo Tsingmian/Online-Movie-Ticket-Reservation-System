@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.movie_ticket_reservation.mapper.OrderMapper">
 
-    <!-- 插入订单，返回自增主键 -->
+    <!-- 插入订单 -->
     <insert id="insertOrder" parameterType="com.example.movie_ticket_reservation.entity.Order" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO orders (
         user_id, screening_id, seat_count,
@@ -17,7 +17,7 @@
     </insert>
 
     <!-- 批量插入订单座位 -->
-    <insert id="insertOrderSeats">
+    <insert id="insertOrderSeats" parameterType="map">
         INSERT INTO order_seat(order_id, seat_id)
         VALUES
         <foreach collection="seatIds" item="id" separator=",">
@@ -30,9 +30,12 @@
         SELECT * FROM orders WHERE id = #{id}
     </select>
 
-    <!-- 根据订单ID查询座位ID列表 -->
-    <select id="selectSeatIdsByOrderId" parameterType="long" resultType="long">
-        SELECT seat_id FROM order_seat WHERE order_id = #{orderId}
+    <!-- 查询订单座位 -->
+    <select id="selectSeatsByOrder" resultType="map" parameterType="long">
+        SELECT s.id AS seatId, s.row_num AS rowNum, s.col_num AS colNum
+        FROM order_seat os
+        JOIN seats s ON os.seat_id = s.id
+        WHERE os.order_id = #{orderId}
     </select>
 
     <!-- 更新订单状态 -->
@@ -51,16 +54,6 @@
         LIMIT #{offset}, #{limit}
     </select>
 
-<!--    <select id="selectSeatsByOrder" resultType="map" parameterType="long">-->
-<!--        SELECT seat_id FROM order_seat WHERE order_id = #{orderId}-->
-<!--    </select>-->
-    <select id="selectSeatsByOrder" resultType="map" parameterType="long">
-        SELECT s.id AS seatId, s.row_num AS rowNum, s.col_num AS colNum
-        FROM order_seat os
-        JOIN seat s ON os.seat_id = s.id
-        WHERE os.order_id = #{orderId}
-    </select>
-
 
     <!-- 查询用户订单总数 -->
     <select id="countOrdersByUser" resultType="int">
@@ -70,5 +63,46 @@
             AND status = #{status}
         </if>
     </select>
+
+    <!-- 管理员查询订单（分页 + 可选状态） -->
+    <select id="selectOrders" resultType="com.example.movie_ticket_reservation.entity.Order">
+        SELECT * FROM orders
+        <if test="status != null">
+            WHERE status = #{status}
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="countOrders" resultType="int">
+        SELECT COUNT(*) FROM orders
+        <if test="status != null">
+            WHERE status = #{status}
+        </if>
+    </select>
+
+    <!-- 删除订单及座位 -->
+    <delete id="deleteOrderSeats" parameterType="long">
+        DELETE FROM order_seat WHERE order_id = #{orderId}
+    </delete>
+
+    <delete id="deleteOrder" parameterType="long">
+        DELETE FROM orders WHERE id = #{orderId}
+    </delete>
+
+    <!-- 更新订单（管理员可用） -->
+    <update id="updateOrder" parameterType="com.example.movie_ticket_reservation.entity.Order">
+        UPDATE orders
+        SET
+        user_id = #{userId},
+        screening_id = #{screeningId},
+        seat_count = #{seatCount},
+        price = #{price},
+        status = #{status},
+        create_time = #{createTime},
+        pay_time = #{payTime}
+        WHERE id = #{id}
+    </update>
+
 
 </mapper>

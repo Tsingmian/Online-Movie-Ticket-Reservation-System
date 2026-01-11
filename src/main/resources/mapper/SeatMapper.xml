@@ -80,4 +80,43 @@
         AND status = 1
     </update>
 
+    <!-- 查询所有座位（管理端用） -->
+    <select id="selectAll" resultType="com.example.movie_ticket_reservation.entity.Seat">
+        SELECT id,
+        screening_id AS screeningId,
+        row_num AS rowNum,
+        col_num AS colNum,
+        status,
+        lock_time AS lockTime
+        FROM seats
+        ORDER BY screening_id, row_num, col_num
+    </select>
+
+    <!-- 新增座位 -->
+    <insert id="insert" parameterType="com.example.movie_ticket_reservation.entity.Seat" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO seats(screening_id, row_num, col_num, status, lock_time)
+        VALUES (#{screeningId}, #{rowNum}, #{colNum}, #{status}, #{lockTime})
+    </insert>
+
+    <!-- 修改座位 -->
+    <update id="update" parameterType="com.example.movie_ticket_reservation.entity.Seat">
+        UPDATE seats
+        SET screening_id = #{screeningId},
+        row_num = #{rowNum},
+        col_num = #{colNum},
+        status = #{status},
+        lock_time = #{lockTime}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除座位 -->
+    <delete id="delete" parameterType="long">
+        DELETE FROM seats WHERE id = #{id}
+    </delete>
+
+
+    <delete id="deleteByScreeningId">
+        DELETE FROM seats WHERE screening_id = #{screeningId}
+    </delete>
+
 </mapper>

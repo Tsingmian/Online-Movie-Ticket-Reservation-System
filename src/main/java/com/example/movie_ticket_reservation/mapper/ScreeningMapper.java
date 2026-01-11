@@ -12,5 +12,13 @@ public interface ScreeningMapper {
     Screening selectById(@Param("id") Long id);
 
     List<Screening> selectByMovieId(@Param("movieId") Long movieId);
+
+    List<Screening> selectAll();
+
+    void insert(Screening screening);
+
+    void update(Screening screening);
+
+    void delete(Long id);
 }
 
