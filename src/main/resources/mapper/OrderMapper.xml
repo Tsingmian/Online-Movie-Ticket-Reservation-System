@@ -6,14 +6,17 @@
 <mapper namespace="com.example.movie_ticket_reservation.mapper.OrderMapper">
 
     <!-- 插入订单，返回自增主键 -->
-    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO orders
-        (user_id, screening_id, total_price, status, create_time)
-        VALUES
-        (#{userId}, #{screeningId}, #{price}, #{status}, #{createTime})
+    <insert id="insertOrder" parameterType="com.example.movie_ticket_reservation.entity.Order" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders (
+        user_id, screening_id, seat_count,
+        price, status, create_time
+        ) VALUES (
+        #{userId}, #{screeningId}, #{seatCount},
+        #{price}, #{status}, #{createTime}
+        )
     </insert>
 
-    <!-- 批量插入 order_seat -->
+    <!-- 批量插入订单座位 -->
     <insert id="insertOrderSeats">
         INSERT INTO order_seat(order_id, seat_id)
         VALUES
@@ -22,12 +25,12 @@
         </foreach>
     </insert>
 
-    <!-- 查询订单 -->
-    <select id="selectById" parameterType="long" resultType="Order">
+    <!-- 根据ID查询订单 -->
+    <select id="selectById" parameterType="long" resultType="com.example.movie_ticket_reservation.entity.Order">
         SELECT * FROM orders WHERE id = #{id}
     </select>
 
-    <!-- 查询订单座位 -->
+    <!-- 根据订单ID查询座位ID列表 -->
     <select id="selectSeatIdsByOrderId" parameterType="long" resultType="long">
         SELECT seat_id FROM order_seat WHERE order_id = #{orderId}
     </select>
@@ -36,5 +39,36 @@
     <update id="updateStatus">
         UPDATE orders SET status = #{status}, pay_time = #{payTime} WHERE id = #{id}
     </update>
+
+    <!-- 分页查询用户订单 -->
+    <select id="selectOrdersByUser" resultType="com.example.movie_ticket_reservation.entity.Order">
+        SELECT * FROM orders
+        WHERE user_id = #{userId}
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+<!--    <select id="selectSeatsByOrder" resultType="map" parameterType="long">-->
+<!--        SELECT seat_id FROM order_seat WHERE order_id = #{orderId}-->
+<!--    </select>-->
+    <select id="selectSeatsByOrder" resultType="map" parameterType="long">
+        SELECT s.id AS seatId, s.row_num AS rowNum, s.col_num AS colNum
+        FROM order_seat os
+        JOIN seat s ON os.seat_id = s.id
+        WHERE os.order_id = #{orderId}
+    </select>
+
+
+    <!-- 查询用户订单总数 -->
+    <select id="countOrdersByUser" resultType="int">
+        SELECT COUNT(*) FROM orders
+        WHERE user_id = #{userId}
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
 
 </mapper>

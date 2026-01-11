@@ -17,18 +17,30 @@
         WHERE id = #{id}
     </select>
 
-    <select id="selectByScreeningId"
-            resultType="com.example.movie_ticket_reservation.entity.Seat">
+<!--    <select id="selectByScreeningId"-->
+<!--            resultType="com.example.movie_ticket_reservation.entity.Seat">-->
+<!--        SELECT-->
+<!--        id,-->
+<!--        screening_id AS screeningId,-->
+<!--        row_num      AS rowNum,-->
+<!--        col_num      AS colNum,-->
+<!--        status-->
+<!--        FROM seats-->
+<!--        WHERE screening_id = #{screeningId}-->
+<!--        ORDER BY row_num, col_num-->
+<!--    </select>-->
+
+    <select id="selectByMovieId"
+            resultType="com.example.movie_ticket_reservation.entity.Screening">
         SELECT
         id,
-        screening_id AS screeningId,
-        row_num      AS rowNum,
-        col_num      AS colNum,
-        status
-        FROM seats
-        WHERE screening_id = #{screeningId}
-        ORDER BY row_num, col_num
+        movie_id   AS movieId,
+        hall_name  AS hallName,
+        start_time AS startTime,
+        price
+        FROM screening
+        WHERE movie_id = #{movieId}
+        ORDER BY start_time
     </select>
-
 
 </mapper>

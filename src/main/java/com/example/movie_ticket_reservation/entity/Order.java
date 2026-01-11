@@ -24,11 +24,13 @@ public class Order {
     private Long screeningId;
 
     // 座位ID（第一阶段：单座）
-    @Setter
-    @Getter
-    private List<Long> seatId;
+//    @Setter
+//    @Getter
+//    private List<Long> seatId;
 
-//    private Integer status;
+    @Getter
+    @Setter
+    private Integer seatCount;
 
     // 订单价格（元）
     @Setter
