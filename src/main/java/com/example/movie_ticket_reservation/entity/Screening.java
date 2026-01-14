@@ -17,12 +17,12 @@ public class Screening {
     @Getter
     private Long movieId;
 
-    // 影厅编号
+    // 影厅号
     @Setter
     @Getter
     private String  hallName;
 
-    // 放映开始时间
+    // 时间
     @Setter
     @Getter
     private LocalDateTime startTime;
@@ -31,20 +31,18 @@ public class Screening {
     @Getter
     private LocalDateTime endTime;
 
-    // 单张票价（单位：元）
+    // 单张票价
     @Setter
     @Getter
     private BigDecimal price;
 
     @Setter
     @Getter
-    private Integer status; // 1=可售 0=停售
+    private Integer status;
+    // 1=可售 0=停售
 
     @Setter
     @Getter
     private LocalDateTime createTime;
-
-    // ===== getter / setter =====
-
 
 }

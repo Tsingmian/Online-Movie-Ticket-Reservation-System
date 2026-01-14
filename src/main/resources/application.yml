@@ -25,7 +25,7 @@ mybatis:
   type-aliases-package: com.example.movie_ticket_reservation.entity
   configuration:
     map-underscore-to-camel-case: true   # movie_id -> movieId
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # ⭐ 打印 SQL
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印 SQL
 
 logging:
   level:

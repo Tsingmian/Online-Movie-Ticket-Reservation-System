@@ -217,7 +217,7 @@ public class OrderService {
         int locked = seatMapper.lockSeats(seatIds);
         if(locked != seatIds.size()) throw new RuntimeException("部分座位已被占用");
 
-        // 计算总价（每张票价格为 screening.price，可加折扣）
+        // 计算总价（每张票价格为 screening.price  折扣）
         BigDecimal totalPrice = screening.getPrice().multiply(BigDecimal.valueOf(seatIds.size()));
         if(seatIds.size() >= 5){
             totalPrice = totalPrice.multiply(BigDecimal.valueOf(0.9));
@@ -303,14 +303,14 @@ public class OrderService {
         Order order = orderMapper.selectById(orderId);
         if (order == null) throw new RuntimeException("订单不存在");
 
-        // 示例：更新状态
+        // 更新状态
         if (updates.containsKey("status")) {
             Integer status = Integer.valueOf(updates.get("status").toString());
             orderMapper.updateStatus(orderId, status, LocalDateTime.now());
             order.setStatus(status);
         }
 
-        // 示例：更新座位
+        // 更新座位
         if (updates.containsKey("seatIds")) {
             List<Long> newSeatIds = ((List<?>) updates.get("seatIds"))
                     .stream().map(o -> Long.valueOf(o.toString())).toList();
@@ -349,7 +349,7 @@ public class OrderService {
         List<Long> seatIds = orderMapper.selectSeatIdsByOrderId(orderId);
 
         // 标记座位为已售（status=1）
-        seatMapper.sellSeats(seatIds); // 👈 需要在 SeatMapper 中实现 sellSeats
+        seatMapper.sellSeats(seatIds);
 
         // 更新订单状态为已支付
         orderMapper.updateStatus(orderId, 1, LocalDateTime.now());

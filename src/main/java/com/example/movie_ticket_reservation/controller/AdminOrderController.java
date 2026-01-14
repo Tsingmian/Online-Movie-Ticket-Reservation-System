@@ -45,7 +45,7 @@ public class AdminOrderController {
         return result;
     }
 
-    // 更新订单（例如修改状态、座位等）
+    // 更新订单
     @PutMapping("/{orderId}")
     public Map<String,Object> updateOrder(
             @PathVariable Long orderId,
@@ -57,7 +57,7 @@ public class AdminOrderController {
         return result;
     }
 
-    // AdminOrderController.java
+
     @PostMapping("/{orderId}/pay")
     public Map<String, Object> forcePay(@PathVariable Long orderId) {
         orderService.updateOrderStatus(orderId, "PAID");

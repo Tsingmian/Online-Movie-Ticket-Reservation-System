@@ -61,7 +61,7 @@ public class AdminScreeningController {
         return new Response(1, "删除成功");
     }
 
-    // 查询座位（可增删改座位可以单独写 SeatController）
+    // 查询座位
     @GetMapping("/{screeningId}/seats")
     public Response getSeats(@PathVariable Long screeningId) {
         List<Seat> seats = screeningService.getSeatsByScreening(screeningId);

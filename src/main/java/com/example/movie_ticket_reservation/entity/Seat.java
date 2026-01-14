@@ -13,6 +13,7 @@ public class Seat {
     @Setter
     @Getter
     private Long screeningId;
+    //   行列
     @Getter
     @Setter
     private Integer rowNum;
@@ -21,7 +22,8 @@ public class Seat {
     private Integer colNum;
     @Setter
     @Getter
-    private Integer status; // 0=可售 1=锁定 2=已售
+    private Integer status;
+    //   0=可售 1=锁定 2=已售
     @Setter
     @Getter
     private LocalDateTime lockTime;

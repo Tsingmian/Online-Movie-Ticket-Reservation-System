@@ -12,13 +12,13 @@ public interface MovieMapper {
     // 普通用户：获取所有上映中的电影
     List<Movie> getAllMoviesAvailable();
 
-    // 管理端：获取所有电影（包括下架的）
+    // 管理端：获取所有电影
     List<Movie> getAllMovies();
 
-    // 根据关键字模糊查询电影（管理端和用户都可用）
+    // 根据关键字模糊查询电影
     List<Movie> searchMovies(@Param("keyword") String keyword);
 
-    // 根据ID获取电影详情
+    // ID获取电影详情
     Movie getMovieById(@Param("id") Long id);
 
     // 新增电影（管理端）

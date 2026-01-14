@@ -158,8 +158,8 @@ public class OrderController {
     private OrderService orderService;
 
     /**
-     * 下单接口（之前的风格）
-     * 请求体示例：
+     * 下单接口
+     *
      * {
      * "userId": 1,
      * "screeningId": 2,
@@ -241,6 +241,18 @@ public class OrderController {
         return orderService.getUserOrders(userId, status, page, size);
     }
 
+//    {
+//        "status": "ok",
+//            "order": {
+//        "id": 501,
+//                "userId": 1001,
+//                "screeningId": 205,
+//                "status": 0,
+//                "createTime": "2026-01-12T07:00:00"
+//    }
+//    }
+//
+
     // 获取单个订单详情
     @GetMapping("/{orderId}")
     public Order getOrder(@PathVariable Long orderId) {
@@ -274,13 +286,11 @@ public class OrderController {
         }
     }
 
-    // 管理员：支付订单（模拟）
+    // 管理员：支付订单 （有bug）
     @PostMapping("/admin/{orderId}/pay")
     public ResponseEntity<?> payOrder(@PathVariable Long orderId) {
         try {
-            // 注意：你的 OrderService 目前没有 payOrder 方法！
-            // 需要补充
-            Order order = orderService.payOrder(orderId); // 👈 需要实现
+            Order order = orderService.payOrder(orderId);
             return ResponseEntity.ok(Map.of("order", order));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));

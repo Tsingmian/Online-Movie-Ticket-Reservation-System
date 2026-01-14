@@ -42,12 +42,8 @@ public class Order {
     @Getter
     private LocalDateTime payTime;
 
-    /**
-     * 订单状态
-     * 0 = 未支付
-     * 1 = 已支付
-     * 2 = 已取消
-     */
+    //  订单  0 = 未支付 1 = 已支付  2 = 已取消
+
     @Setter
     @Getter
     private Integer status;
@@ -56,7 +52,5 @@ public class Order {
     @Setter
     @Getter
     private LocalDateTime createTime;
-
-    // ===== getter / setter =====
 
 }

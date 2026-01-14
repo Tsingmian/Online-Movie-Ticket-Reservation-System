@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 必须与 Mapper 接口全限定名完全一致 -->
+<mapper namespace="com.example.movie_ticket_reservation.mapper.CommentMapper">
+
+    <!-- type 必须是实体类的完整类名 -->
+    <resultMap id="CommentResultMap" type="com.example.movie_ticket_reservation.entity.Comment">
+        <id property="commentId" column="comment_id"/>
+        <result property="movieId" column="movie_id"/>
+        <result property="userName" column="user_name"/>
+<!--        <result property="commentContent" column="comment_content"/>-->
+        <result property="content" column="comment_content"/>
+
+        <result property="commentTime" column="comment_time"/>
+    </resultMap>
+
+    <select id="getCommentsByMovieId" resultMap="CommentResultMap">
+        SELECT comment_id, movie_id, user_name, comment_content, comment_time
+        FROM movie_comment
+        WHERE movie_id = #{movieId}
+        ORDER BY comment_time DESC
+    </select>
+
+    <insert id="addComment">
+        INSERT INTO movie_comment (movie_id, user_name, comment_content)
+        VALUES (#{movieId}, #{userName}, #{content})
+    </insert>
+
+</mapper>
