@@ -119,4 +119,20 @@
         DELETE FROM seats WHERE screening_id = #{screeningId}
     </delete>
 
+    <select id="selectAvailableByScreeningId"
+            resultType="com.example.movie_ticket_reservation.entity.Seat">
+        SELECT id,
+        screening_id AS screeningId,
+        row_num AS rowNum,
+        col_num AS colNum,
+        status,
+        lock_time AS lockTime
+        FROM seats
+        WHERE screening_id = #{screeningId}
+        AND status = 0
+        ORDER BY row_num, col_num
+    </select>
+
+
+
 </mapper>

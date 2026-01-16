@@ -54,8 +54,8 @@ This online movie ticket booking system offers role-based access: end users can 
 
 ### 5. 评论模块
 - 电影评论
-- 二级评论（回复）
-- 点赞 / 点踩（每人一次）
+- 二级评论（回复）（暂时未实现）
+- 点赞 / 点踩（每人一次）（暂时未实现）
 
 ---
 
@@ -81,48 +81,52 @@ MySQL
 
 ```text
 movie-ticket-reservation/
-├─ backend/                         ← Spring Boot 后端
+├─ frontend/                          # Vue3 + Vite 前端
+│  ├─ public/
+│  ├─ src/
+│  │  ├─ assets/                      # 静态资源
+│  │  ├─ components/                 # 通用组件
+│  │  ├─ router/
+│  │  │  └─ index.js                  # 路由配置
+│  │  ├─ utils/                       # 工具函数
+│  │  ├─ views/                       # 页面视图
+│  │  │  ├─ Login.vue
+│  │  │  ├─ MainLayout.vue
+│  │  │  ├─ MovieList.vue
+│  │  │  ├─ MovieDetail.vue
+│  │  │  ├─ SeatSelection.vue
+│  │  │  ├─ OrderList.vue
+│  │  │  ├─ OrderDetail.vue
+│  │  │  ├─ ReviewList.vue
+│  │  │  └─ Admin.vue
+│  │  ├─ App.vue
+│  │  ├─ main.js
+│  │  └─ style.css
+│  ├─ index.html
+│  ├─ package.json
+│  └─ vite.config.js
+│
+├─ movie-ticket-reservation/          # Spring Boot 后端
 │  ├─ src/
 │  │  ├─ main/
-│  │  │  ├─ java/
-│  │  │  │  └─ com/example/movie_ticket_reservation/
-│  │  │  │     ├─ controller/       ← Controller（对外接口）
-│  │  │  │     │  └─ OrderController.java
-│  │  │  │     ├─ service/          ← 业务层（事务 / 锁座 / 下单）
-│  │  │  │     │  ├─ OrderService.java
-│  │  │  │     │  └─ SeatService.java
-│  │  │  │     ├─ mapper/           ← MyBatis 接口
-│  │  │  │     │  ├─ OrderMapper.java
-│  │  │  │     │  ├─ SeatMapper.java
-│  │  │  │     │  └─ ScreeningMapper.java
-│  │  │  │     ├─ entity/           ← 实体类
-│  │  │  │     │  ├─ Order.java
-│  │  │  │     │  ├─ Seat.java
-│  │  │  │     │  └─ Screening.java
-│  │  │  │     ├─ config/           ← 跨域 / MyBatis / Web 配置
-│  │  │  │     │  └─ CorsConfig.java
-│  │  │  │     └─ MovieTicketReservationApplication.java
-│  │  │  └─ resources/
-│  │  │     ├─ mapper/              ← MyBatis XML
-│  │  │     │  ├─ OrderMapper.xml
-│  │  │     │  ├─ SeatMapper.xml
-│  │  │     │  └─ ScreeningMapper.xml
-│  │  │     ├─ application.yml      ← 配置文件
-│  │  │     └─ application-dev.yml
-│  │  └─ test/                      ← 后端测试
-│  └─ pom.xml
+│  │  │  ├─ java/com/example/movie_ticket_reservation/
+│  │  │  │  ├─ config/                # Web / 跨域配置
+│  │  │  │  ├─ controller/            # 控制层
+│  │  │  │  ├─ service/               # 业务层
+│  │  │  │  ├─ mapper/                # MyBatis 接口
+│  │  │  │  ├─ entity/                # 实体类
+│  │  │  │  └─ MovieTicketReservationApplication.java
+│  │  │  ├─ resources/
+│  │  │  │  ├─ mapper/                # Mapper XML
+│  │  │  │  ├─ application.yml
+│  │  │  │  └─ application.properties
+│  │  └─ test/                        # 单元测试
+│  ├─ pom.xml
+│  └─ mvnw
 │
-└─ frontend/                        ← Vue3 + Vite 前端
-   ├─ src/
-   │  ├─ views/                     ← 页面级组件
-   │  │  └─ OrderTest.vue
-   │  ├─ router/
-   │  │  └─ index.js
-   │  ├─ App.vue
-   │  └─ main.js
-   ├─ index.html
-   ├─ package.json
-   └─ vite.config.js
+├─ README.md
+└─ LICENSE
+
 ```
 - frontend: online-movie-ticket-reservation-system-frontend
 

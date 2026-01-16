@@ -42,9 +42,7 @@ import java.util.Map;
 //        this.orderService = orderService;
 //    }
 //
-//    /**
-//     * 下单接口
-//     */
+//    // 下单接口
 //    @PostMapping("/place")
 //    public Map<String,Object> placeOrder(@RequestParam Long userId,
 //                                         @RequestParam Long screeningId,
@@ -56,9 +54,7 @@ import java.util.Map;
 //        return result;
 //    }
 //
-//    /**
-//     * 支付接口
-//     */
+//    // 支付接口
 //    @PostMapping("/pay")
 //    public Map<String,Object> payOrder(@RequestParam Long orderId) {
 //        Order order = orderService.payOrder(orderId);
@@ -159,7 +155,6 @@ public class OrderController {
 
     /**
      * 下单接口
-     *
      * {
      * "userId": 1,
      * "screeningId": 2,

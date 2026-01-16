@@ -15,7 +15,7 @@ public class SeatService {
         this.seatMapper = seatMapper;
     }
 
-    // ===================== 普通查询 =====================
+    //  普通查询
     public List<Seat> getSeatsByScreening(Long screeningId) {
         return seatMapper.selectByScreeningId(screeningId);
     }
@@ -24,7 +24,7 @@ public class SeatService {
         return seatMapper.selectById(id);
     }
 
-    // ===================== 管理端增删改查 =====================
+    //  管理端增删改查
     public List<Seat> getAllSeats() {
         return seatMapper.selectAll();
     }
@@ -40,4 +40,10 @@ public class SeatService {
     public void deleteSeat(Long id) {
         seatMapper.delete(id);
     }
+
+    //  可用座位查询
+    public List<Seat> getAvailableSeats(Long screeningId) {
+        return seatMapper.selectAvailableByScreeningId(screeningId);
+    }
+
 }

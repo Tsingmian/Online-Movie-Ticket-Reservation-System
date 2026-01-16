@@ -30,6 +30,16 @@
         SELECT * FROM orders WHERE id = #{id}
     </select>
 
+    <!-- 根据订单ID查询座位ID列表 -->
+    <select id="selectSeatIdsByOrderId"
+            parameterType="long"
+            resultType="long">
+        SELECT seat_id
+        FROM order_seat
+        WHERE order_id = #{orderId}
+    </select>
+
+
     <!-- 查询订单座位 -->
     <select id="selectSeatsByOrder" resultType="map" parameterType="long">
         SELECT s.id AS seatId, s.row_num AS rowNum, s.col_num AS colNum

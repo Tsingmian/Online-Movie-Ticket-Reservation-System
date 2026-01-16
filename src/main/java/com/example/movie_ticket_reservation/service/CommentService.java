@@ -11,7 +11,7 @@ import java.util.List;
 public class CommentService {
 
     @Autowired
-    private CommentMapper commentMapper; // ← 注意：这里应该是 CommentMapper
+    private CommentMapper commentMapper;
 
     public void addComment(Long movieId, String userName, String content) {
         commentMapper.addComment(movieId, userName, content);

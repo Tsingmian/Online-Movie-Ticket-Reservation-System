@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data   // ⭐ 自动生成 getter / setter / toString
+@Data   // 可自动生成 getter / setter / toString
 public class Comment {
 
     private Long commentId;

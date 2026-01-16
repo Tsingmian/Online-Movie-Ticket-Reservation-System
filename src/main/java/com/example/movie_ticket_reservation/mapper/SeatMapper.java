@@ -61,4 +61,7 @@ public interface SeatMapper {
     // SeatMapper.java
     void deleteByScreeningId(@Param("screeningId") Long screeningId);
 
+    List<Seat> selectAvailableByScreeningId(@Param("screeningId") Long screeningId);
+
+
 }

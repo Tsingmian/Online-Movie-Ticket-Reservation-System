@@ -195,9 +195,9 @@ public class OrderService {
 
 //    @Autowired
 //    private OrderService orderService;
-    /**
-     * 下单逻辑
-     */
+
+//    下单逻辑
+
     @Transactional
     public Order placeOrder(Long userId, Long screeningId, List<Long> seatIds) {
         Screening screening = screeningMapper.selectById(screeningId);
